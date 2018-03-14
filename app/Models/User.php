@@ -10,8 +10,12 @@ class User extends Model
 // el nombre de la tabla con la siguiente sentencia.
 // protected $table = 'users';
 
+// public function roles(){
+//     this->belongsToMany('App\Models\Role','user_role','user_id','role_id');
+// }
+
   protected $fillable = [
-      'name', 'email', 'password',
+      'name', 'email', 'login', 'password',
     ];
 
     protected $hidden = [
@@ -19,23 +23,12 @@ class User extends Model
     ];
 
     protected $casts = [
-      'is_admin' => 'boolean'
+      'is_active' => 'boolean',
     ];
 
-    public function isAdmin()
+    public function Roles()
     {
-      return $this->email===is_admin;
-
-    }
-
-    public static function findByEmail($email)
-    {
-      return static::where(compact('email'))->first();
-    }
-
-    public  function profession() // profession + _ + id solo arroja una profesion Singular
-    {
-      return $this->belongsTo(Profession::class);
+      return $this->belongsTo(Role::class);
     }
 
 }

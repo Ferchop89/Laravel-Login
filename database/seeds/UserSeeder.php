@@ -14,31 +14,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // User::create([
-        //   'name'=>'Guillermo Castillo',
-        //   'email'=>'gcaas@hots.com',
-        //   'password'=>bcrypt('laravel'),
-        //   'profession_id'=>Profession::whereTitle('Desarrollador Back-end')->value('id'),
-        //   'is_admin' => true,
-        // ]);
-
-        $professionId=Profession::whereTitle('Desarrollador Back-end')->value('id');
-
         User::create([
           'name'=>'Guillermo Castillo',
           'email'=>'gcaas@hots.com',
+          'login' => 'gcas',
           'password'=>bcrypt('laravel'),
-          'profession_id'=>$professionId,
-          'is_admin' => true,
+          'is_active' => true,
         ]);
-
-        //primer usuario con el Id superpuesto con el que habiamos calculado
-        factory(User::class)->create([
-          'profession_id' => $professionId
-        ]);
-
-        // Nuevo registro sin profession_id;
+        // 5 nuevos  registrs;
         factory(User::class,5)->create();
-
     }
 }
