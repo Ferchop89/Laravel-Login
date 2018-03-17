@@ -50,13 +50,8 @@
     <main role="main" class="container">
 
       <div class="row mt-3">
-        <div class="col-9">
+        <div class="col-12">
           @yield('content')
-        </div>
-        <div class="col-3">
-          {{-- @section('barralateral')
-                <h2>Barra lateral</h2>
-          @show --}}
         </div>
       </div>
 

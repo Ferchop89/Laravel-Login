@@ -12,9 +12,7 @@ class UserController extends Controller
     public function index()
     {
       $users = User::all();
-
       $title = 'Listado de Usuarios';
-
       return view('users.index', compact('title','users'));
     }
 
@@ -34,23 +32,52 @@ class UserController extends Controller
         $data = request()->validate([
           'name' => 'required',
           'email' => ['required','email','unique:users,email'],
+          'login' => ['required','min:6','unique:users,login'],
           'password' => ['required','min:6'],
+          'Admin' => '',
+          'FacEsc' => '',
+          'AgUnam' => '',
+          'Jud' => '',
+          'Sria' => '',
+          'JSecc' => '',
+          'JArea' => '',
+          'Ofisi' => '',
+          'Invit' => '',
           ],[
           'name.required' => 'El campo nombre es obligatorio',
           'email.required' => 'El campo email es obligatorio',
           'email.email' => 'El campo email no es valido',
           'email.unique' => 'Este correo ya ha sido utilizado',
+          'login.required' => 'El login mínimo es de 6 caracteres',
+          'login.unique' => 'Este login ya ha sido utilizado',
           'password.required' => 'El campo password es obligatorio',
           'password.min' => 'El password minimo es de 6 caracteres'
         ]);
         //$data = request()->all(); //Con esto funcional la prueba pero no la validacion
-        User::create([
-          'name' => $data['name'],
-          'email' => $data['email'],
-          'password' => bcrypt($data['password']),
-        ]);
+
+        $user = new User();
+        $user->name =  $data['name'];
+        $user->email = $data['email'];
+        $user->login = $data['login'];
+        $user->password = bcrypt($data['password']);
+        $user->save();
+
+        // borramos todos los roles asociados en la tabla role_table
+        $user->roles()->detach();
+
+        // verificamos si se encuentra verificada la casilla entonces lo asociamos a la tabla pivote
+        if( isset($_POST['Admin'])) { $user->roles()->attach( $_POST['Admin'] ); }
+        if( isset($_POST['FacEsc'])) { $user->roles()->attach( $_POST['FacEsc'] ); }
+        if( isset($_POST['AgUnam'])) { $user->roles()->attach( $_POST['AgUnam'] ); }
+        if( isset($_POST['Jud'])) { $user->roles()->attach( $_POST['Jud'] ); }
+        if( isset($_POST['Sria'])) { $user->roles()->attach( $_POST['Sria'] ); }
+        if( isset($_POST['JSecc'])) { $user->roles()->attach( $_POST['JSecc'] ); }
+        if( isset($_POST['JArea'])) { $user->roles()->attach( $_POST['JArea'] ); }
+        if( isset($_POST['Ofisi'])) { $user->roles()->attach( $_POST['Ofisi'] ); }
+        $user->roles()->attach( '9' ); // por omision, el usuario tiene el rol de invitado
 
       return redirect()->route('users');  // redireccionamos al listado de usuarios
+
     }
 
     function edit(User $user)
@@ -63,9 +90,6 @@ class UserController extends Controller
         // $data = request()->all(); // no se debe usar
         $data = request()->validate([
           'name' => 'required',
-          // El tercer parametro $user->id se va a excluir de la prueba puesto que no permtia que se pudiera
-          // validar que el email fuera único cuando se estaba actualizando el registro.
-          // 'email' => 'required|email|unique:users,email,'.$user->id, //mejorando la legimiblida
           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
           'password' => '',
         ]);
@@ -87,7 +111,5 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users'); // equivalente a la ruta 'usuarios'
     }
-
- public function prueba(){return view('users.h');}
 
 }

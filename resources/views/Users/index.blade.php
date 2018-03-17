@@ -17,6 +17,8 @@
         <th scope="col">#</th>
         <th scope="col">Nombre</th>
         <th scope="col">Correo</th>
+        <th scope="col">Login</th>
+        <th scope="col">Role</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -26,6 +28,12 @@
           <th scope="row">{{ $user->id}}</th>
           <td>{{ $user->name }}</td>
           <td>{{ $user->email }}</td>
+          <td>{{ $user->login }}</td>
+          <td>
+              @foreach($user->roles()->where('user_id',$user->id)->get() as $roles)
+                /{{ $roles->nombre }}
+              @endforeach
+          </td>
           <td>
             <form action="{{ route('users.destroy',[ $user ]) }}" method="POST">
               {{ csrf_field() }}

@@ -15,7 +15,7 @@ class CreateProcedenciasTable extends Migration
     {
         Schema::create('procedencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('procedencia');
+            $table->string('procedencia');
             $table->timestamps();
         });
     }
