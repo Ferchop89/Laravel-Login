@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
 use Illuminate\Validation\Rule;
+use App\User;
+use App\Role;
 
 class UserController extends Controller
 {
@@ -24,7 +25,9 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        // Se agregan los roles para crearlos dinámicamente vista de nuevos usuarios (create)
+        $roles = Role::orderBy('id','asc')->get();
+        return view('users.create',['roles'=>$roles]);
     }
 
     public function store()
@@ -91,14 +94,37 @@ class UserController extends Controller
         $data = request()->validate([
           'name' => 'required',
           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-          'password' => '',
-        ]);
+          'login' => ['required','min:6'],
+          'password' => ''],[
+          'name.required' => 'El campo nombre es obligatorio',
+          'email.required' => 'El campo email es obligatorio',
+          'email.email' => 'El campo email no es valido',
+          'email.unique' => 'Este correo ya ha sido utilizado',
+          'login.required' => 'El campo login obligatorio',
+          'login.min' => 'El login minimo es de 6 caracteres',
+          ]
+        );
 
         if($data['password'] != null){
             $data['password'] = bcrypt($data['password']);
         } else {
               unset($data['password']);
         }
+
+
+        // borramos todos los roles asociados en la tabla role_table
+        $user->roles()->detach();
+
+        // verificamos si se encuentra verificada la casilla entonces lo asociamos a la tabla pivote
+        if( isset($_POST['Admin'])) { $user->roles()->attach( $_POST['Admin'] ); }
+        if( isset($_POST['FacEsc'])) { $user->roles()->attach( $_POST['FacEsc'] ); }
+        if( isset($_POST['AgUnam'])) { $user->roles()->attach( $_POST['AgUnam'] ); }
+        if( isset($_POST['Jud'])) { $user->roles()->attach( $_POST['Jud'] ); }
+        if( isset($_POST['Sria'])) { $user->roles()->attach( $_POST['Sria'] ); }
+        if( isset($_POST['JSecc'])) { $user->roles()->attach( $_POST['JSecc'] ); }
+        if( isset($_POST['JArea'])) { $user->roles()->attach( $_POST['JArea'] ); }
+        if( isset($_POST['Ofisi'])) { $user->roles()->attach( $_POST['Ofisi'] ); }
+        $user->roles()->attach( '9' ); // por omision, el usuario tiene el rol de invitado
 
         $user->update($data);
 
@@ -108,6 +134,9 @@ class UserController extends Controller
 
     function destroy(User $user)
     {
+        // borramos todos los roles asociados en la tabla role_table
+        $user->roles()->detach();
+
         $user->delete();
         return redirect()->route('users'); // equivalente a la ruta 'usuarios'
     }

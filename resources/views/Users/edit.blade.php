@@ -33,6 +33,10 @@
           <input type="email" class="form-control" name="email" id="email" placeholder="Usuario@net.com" value="{{ old('email',$user->email)}}"/>
         </div>
         <div class="form-group">
+          <label for="login">Login</label>
+          <input type="text" class="form-control" name="login" id="login" placeholder="mayor a seis caracteres" value="{{ old('login',$user->login)}}"/>
+        </div>
+        <div class="form-group">
           <label for="password">Password</label>
           <input type="password" class="form-control" name="password" id="password" placeholder="mayor a seis caracteres"/>
         </div>

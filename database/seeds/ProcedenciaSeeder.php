@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Procedencia;
+use App\Procedencia;
 
 class ProcedenciaSeeder extends Seeder
 {

@@ -4,6 +4,6 @@
 
 @section('content')
 
-
+<h1>HOLA EXTRATERRICOLAS</h1>
 
 @endsection()
