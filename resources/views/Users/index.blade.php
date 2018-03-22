@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title','Usuarios')
 
@@ -11,14 +11,12 @@
 </div>
 
   @if($users->isNotEmpty())
-  <table class="table table-hover">
+  <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Alias</th>
         <th scope="col">Correo</th>
-        <th scope="col">Role</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -27,13 +25,7 @@
         <tr>
           <th scope="row">{{ $user->id}}</th>
           <td>{{ $user->name }}</td>
-          <td>{{ $user->username }}</td>
           <td>{{ $user->email }}</td>
-          <td>
-              @foreach($user->roles()->where('user_id',$user->id)->get() as $roles)
-                /{{ $roles->nombre }}
-              @endforeach
-          </td>
           <td>
             <form action="{{ route('users.destroy',[ $user ]) }}" method="POST">
               {{ csrf_field() }}

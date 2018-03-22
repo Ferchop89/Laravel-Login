@@ -140,5 +140,6 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users'); // equivalente a la ruta 'usuarios'
     }
+    public function prueba(){return view('users.h');}
 
 }

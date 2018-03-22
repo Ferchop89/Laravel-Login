@@ -1,7 +1,8 @@
 @extends('layouts.app')
+@section('title', 'CONDOC | UNAM')
 
 @section('content')
-<div class="container">
+<div id="is" class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
