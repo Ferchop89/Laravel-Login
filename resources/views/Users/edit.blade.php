@@ -29,12 +29,12 @@
           <input type="text" class="form-control" name="name" id="name" placeholder="Nombre de usuario" value="{{ old('name',$user->name)}}"/>
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Usuario@net.com" value="{{ old('email',$user->email)}}"/>
+          <label for="username">Alias</label>
+          <input type="text" class="form-control" name="username" id="username" placeholder="mayor a seis caracteres" value="{{ old('username',$user->username)}}"/>
         </div>
         <div class="form-group">
-          <label for="login">Login</label>
-          <input type="text" class="form-control" name="login" id="login" placeholder="mayor a seis caracteres" value="{{ old('login',$user->login)}}"/>
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Usuario@net.com" value="{{ old('email',$user->email)}}"/>
         </div>
         <div class="form-group">
           <label for="password">Password</label>

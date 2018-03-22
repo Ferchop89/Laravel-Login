@@ -12,12 +12,12 @@
       <div class="form-control">{{ $user->name }}</div>
     </div>
     <div class="form-group">
-      <label for="correo">Correo Electrónico</label>
-      <div class="form-control">{{ $user->email }}</div>
+      <label for="username">Alias</label>
+      <div class="form-control">{{ $user->username }}</div>
     </div>
     <div class="form-group">
-      <label for="login">Login</label>
-      <div class="form-control">{{ $user->login }}</div>
+      <label for="correo">Correo Electrónico</label>
+      <div class="form-control">{{ $user->email }}</div>
     </div>
 
     <div>

@@ -13,15 +13,18 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-          $role_Invitado=Role::where('nombre','Invit')->first();
-          $user=new User();
-          $user->name = 'Guillermo Castillo';
-          $user->email = 'gcaas@hots.com';
-          $user->login = 'gcas';
+          $user= new User();
+          $user->name = 'Porfirio Remigio';
+          $user->username = 'premigio';
+          $user->email = 'premi@emilio.com';
           $user->password = bcrypt('laravel');
           $user->is_active = true;
           $user->save();
-          $user->roles()->attach($role_Invitado);
+          $role=Role::where('nombre','Invit')->first();
+          $user->roles()->attach($role);
+          $role=Role::where('nombre','FacEsc')->first();
+          $user->roles()->attach($role);
+
 
           // usuarios aleatorios con role aleatorio
           for ($i=0; $i < 9; $i++) {
@@ -34,9 +37,7 @@ class UserSeeder extends Seeder
               }
             }
           }
-
-//          $user->roles()->attach($role_Invitado);
-
+          // $user->roles()->attach($role_Invitado);
           // factory(User::class)->create();
     }
 }

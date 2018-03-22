@@ -34,8 +34,8 @@ class UserController extends Controller
     {
         $data = request()->validate([
           'name' => 'required',
+          'username' => ['required','min:6','unique:users,username'],
           'email' => ['required','email','unique:users,email'],
-          'login' => ['required','min:6','unique:users,login'],
           'password' => ['required','min:6'],
           'Admin' => '',
           'FacEsc' => '',
@@ -48,11 +48,11 @@ class UserController extends Controller
           'Invit' => '',
           ],[
           'name.required' => 'El campo nombre es obligatorio',
+          'username.required' => 'El alias mínimo es de 6 caracteres',
+          'username.unique' => 'Este alias ya ha sido utilizado',
           'email.required' => 'El campo email es obligatorio',
           'email.email' => 'El campo email no es valido',
           'email.unique' => 'Este correo ya ha sido utilizado',
-          'login.required' => 'El login mínimo es de 6 caracteres',
-          'login.unique' => 'Este login ya ha sido utilizado',
           'password.required' => 'El campo password es obligatorio',
           'password.min' => 'El password minimo es de 6 caracteres'
         ]);
@@ -60,8 +60,8 @@ class UserController extends Controller
 
         $user = new User();
         $user->name =  $data['name'];
+        $user->username = $data['username'];
         $user->email = $data['email'];
-        $user->login = $data['login'];
         $user->password = bcrypt($data['password']);
         $user->save();
 
@@ -93,15 +93,16 @@ class UserController extends Controller
         // $data = request()->all(); // no se debe usar
         $data = request()->validate([
           'name' => 'required',
+          'username' => ['required','min:6'],
           'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-          'login' => ['required','min:6'],
-          'password' => ''],[
-          'name.required' => 'El campo nombre es obligatorio',
-          'email.required' => 'El campo email es obligatorio',
-          'email.email' => 'El campo email no es valido',
-          'email.unique' => 'Este correo ya ha sido utilizado',
-          'login.required' => 'El campo login obligatorio',
-          'login.min' => 'El login minimo es de 6 caracteres',
+          'password' => ''
+          ],[
+            'name.required' => 'El campo nombre es obligatorio',
+            'username.required' => 'El campo alias obligatorio',
+            'username.min' => 'El alias minimo es de 6 caracteres',
+            'email.required' => 'El campo email es obligatorio',
+            'email.email' => 'El campo email no es valido',
+            'email.unique' => 'Este correo ya ha sido utilizado',
           ]
         );
 
@@ -110,7 +111,6 @@ class UserController extends Controller
         } else {
               unset($data['password']);
         }
-
 
         // borramos todos los roles asociados en la tabla role_table
         $user->roles()->detach();

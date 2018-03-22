@@ -28,13 +28,13 @@
           </div>
 
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Usuario@net.com" value="{{ old('email')}}"/>
+            <label for="username">Alias</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="mayor a seis caracteres" value="{{ old('username')}}"/>
           </div>
 
           <div class="form-group">
-            <label for="login">Login</label>
-            <input type="text" class="form-control" name="login" id="login" placeholder="mayor a seis caracteres" value="{{ old('login')}}"/>
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Usuario@net.com" value="{{ old('email')}}"/>
           </div>
 
           <div class="form-group">
