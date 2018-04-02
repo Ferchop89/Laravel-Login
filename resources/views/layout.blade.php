@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>@yield('title') - DGAE</title>
+    <title>@yield('title') - SPe</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -50,13 +50,8 @@
     <main role="main" class="container">
 
       <div class="row mt-3">
-        <div class="col-9">
+        <div class="col-12">
           @yield('content')
-        </div>
-        <div class="col-3">
-          {{-- @section('barralateral')
-                <h2>Barra lateral</h2>
-          @show --}}
         </div>
       </div>
 

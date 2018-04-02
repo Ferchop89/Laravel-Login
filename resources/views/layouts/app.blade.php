@@ -13,6 +13,10 @@
     <title>@yield('title')</title>
     <!-- /Sección: Title del Sitio -->
     <!-- Sección: Links -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-CNwnGWPO03a1kOlAsGaH5g8P3dFaqFqqGFV/1nkX5OU=" crossorigin="anonymous" /> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link href="{{ asset('images/favicon.ico') }}" rel="shortcut icon" type="image/x-icon">
     <link href="{{ asset('images/custom_icon.png') }}" rel="apple-touch-icon">
     <link href="{{ asset('images/custom_icon.png') }}" sizes="150x150" rel="icon">
@@ -54,7 +58,6 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a id="btn" href="{{ route('login') }}">Iniciar sesión</a></li>
-                            <li><a id="btn" href="{{ route('register') }}">Registrarse</a></li>
                         @else
                             <li class="dropdown">
                                 <a id="btn" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -162,18 +165,18 @@
     </footer>
 
     <!-- Sección: Scripts -->
-    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script> --}}
     <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script> --}}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Material Design Bootstrap -->
-    <script type="text/javascript" src="{{ asset('js/mdb.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/mdb.js') }}"></script> --}}
     <!-- Analytics -->
-    <script type="text/javascript" src="{{ asset('js/analytics.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/analytics.js') }}"></script> --}}
     <!-- barra de navegación-->
-    <script type="text/javascript" src="{{ asset('js/navbar.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/navbar.js') }}"></script> --}}
     <!-- /Sección: Scripts -->
 
 <div class="hiddendiv common"></div></body></html>
